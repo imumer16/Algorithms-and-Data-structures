@@ -1,3 +1,6 @@
+// Palindrome words and phrases are spelled the same backward and forward.
+// e.g civic, level, radar e.t.c.
+
 #include <iostream>
 #include <string>
 #include <cctype>
