@@ -1,72 +1,37 @@
-#include<iostream>
+#include <bits/stdc++.h>
+// return -1 if not found
+// else return  index
 using namespace std;
 
-void binarySearch() {
-	int size;
-	cout << endl << endl;
-	cout << " Enter size of array: ";
-	cin >> size;
-	int *arr = new int[size];
+class Solution {
+public:
+    int search(vector<int> nums, int target) {
+        int start=0,end=nums.size()-1,mid=0;
+        if(nums[start] == target){ return start; }
+        if(nums[end] == target){ return end; }
+        do{
+            if (target < nums[start] || target > nums[end]) return -1;
+            mid=(start+end)/2;
+            if(target == nums[mid]) return mid;
+            else if(target > nums[mid]){start=mid+1;}
+            else if(target < nums[mid]){end=mid-1;}
+            
+        }while(target != nums[mid]);
+        
+        if(nums[start] == target){ return start; }
+        return -1;
+    }
+};
+int main()
+{
+    Solution sol;
+    cout<<sol.search({-1,0,3,5,9,12},9)<<endl; //4
+    cout<<sol.search({5},5)<<endl; //0
+    cout<<sol.search({-1,0,3,5,9,12},-1)<<endl; //0
+    cout<<sol.search({-1,0,3,5,9,12},12)<<endl; //5
+    cout<<sol.search({-1,0,3,5,9,12},10)<<endl; //-1
+    cout<<sol.search({-1,0,3,5,9,12},13)<<endl; //-1
+    cout<<sol.search({-1,0,3,5,9,12},-2)<<endl; //-1
 
-	for (int i = 0; i < size; i++) {
-		cout << " Enter Element " << i + 1 << " in array: ";
-		cin >> arr[size];
-	}
-
-	int start = 0, end = size - 1;
-	int mid = 0;
-
-	cout << endl << endl;
-	cout << " ALL DATA ENTERD PRESS ANY KEY TO MOVE FORWARD! " << endl;
-	cout << " -----------------------------------------------" << endl << " ";
-	system("pause");
-	system("cls");
-
-	int x, count = 0;
-	cout << endl << endl;
-	cout << " Enter Element you want find: ";
-	cin >> x;
-
-	if (x<arr[start] || x>arr[end]) {
-		cout << " Not Found! " << endl;
-	}
-	else {
-
-	A:	mid = (start + end) / 2;
-
-	B:	if (x == arr[mid]) {
-		cout << " Found " << x << endl;
-		cout << " Found on " << count << " round" << endl;
-	}
-		if (x < arr[mid]) {
-			if (end - start == 1) {
-				if (x == arr[mid - 1]) {
-					mid = mid - 1;
-					count++;
-					goto B;
-				}
-			}
-			end = mid;
-			count++;
-			goto A;
-		}
-
-		if (x > arr[mid]) {
-			if (end - start == 1) {
-				mid = mid + 1;
-				count++;
-				goto B;
-			}
-			start = mid;
-			count++;
-			goto A;
-		}
-	}
-	delete[] arr;
-}
-
-int main() {
-	system("COLOR 0A");
-	binarySearch();
-	return 0;
+    return 0;
 }
